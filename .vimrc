@@ -8,34 +8,16 @@ call plug#begin('~/.vim/plugged')
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
-" Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
-" Using a non-master branch
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
-
 " For JS Development
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'
-Plug 'mattn/emmet-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'sheerun/vim-polyglot'
 
-" For Php Development
-Plug 'StanAngeloff/php.vim'
-Plug 'stephpy/vim-php-cs-fixer'
- 
 " COC
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -45,13 +27,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " :CocInstall coc-eslint coc-prettier
 
 " Color themes
-Plug 'itchyny/lightline.vim'
-Plug 'tomasr/molokai'
+" Plug 'arzg/vim-colors-xcode'
+Plug 'morhetz/gruvbox'
 
 "Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
 
-" Initialize plugin system
+" For php development
+Plug 'stephpy/vim-php-cs-fixer'
+
+"Initialize plugin system
 call plug#end()
 
 " ------------------------------------------------------
@@ -74,23 +59,12 @@ if (empty($TMUX))
   endif
 endif
 
-
-" status=2, makes lightline colors visible
-set laststatus=2
-" removes vim's mode display (line Insert, Visual) as lightline displays those
-set noshowmode
-" changes lightline theme 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-            \ }
-
 syntax on
-colorscheme molokai
-
-" this line allows for theme colors to show up
-let g:rehash256 = 1
-let g:molokai_original = 1
-" --- END --- Onedark color scheme
+" enable color scheme
+"colorscheme xcodedark
+colorscheme gruvbox
+set background=dark    " Setting dark mode
+" --- END --- spaceduck color scheme
 
 " --- start --- NerdTree Settings
 map <C-n> :NERDTreeToggle<CR>
@@ -98,7 +72,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 " --- start --- COC Settings
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources
-
 " use <tab> for trigger completion and navigate to the next complete item
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
@@ -123,8 +96,13 @@ endif
 
 " Files to ignore
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 " --- end --- ctrlp Settings
+
+" php-cs-fixer-config
+let g:php_cs_fixer_path = "~/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_rules = "@PSR2"
+let g:php_cs_fixer_php_path = "php"
+
 
 " ---------------- END PLUGIN RELATED SECTION ------------
 " ------------------------------------------------------
@@ -151,9 +129,6 @@ let mapleader=","
 " Key for toggling paste
 set pastetoggle=<c-z>
 
-" Allow you to scroll using mouse scroll wheel
-set mouse=a
-
 " Source - https://vim.fandom.com/wiki/Switch_between_Vim_window_splits_easily
 set wmw=0           " do not display current line of each minimized file
 nmap <c-h> <c-w>h
@@ -167,5 +142,6 @@ set noswapfile      " No swap files
 set incsearch
 set hlsearch " Highlight all search results
 
-" php format file on save
+" fix on-save for php-cs-fixer plugin
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
+
