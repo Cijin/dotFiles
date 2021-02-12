@@ -36,6 +36,13 @@ Plug 'jiangmiao/auto-pairs'
 " For php development
 Plug 'stephpy/vim-php-cs-fixer'
 
+" Surround use cs (change surrounding) to change 
+" quotes or tags surrounding a word or line
+Plug 'tpope/vim-surround'
+
+" Vim-fugitive git plugin
+Plug 'tpope/vim-fugitive'
+
 "Initialize plugin system
 call plug#end()
 
@@ -124,7 +131,7 @@ set cindent         "Like smartindent, but stricter and more customisable
 " --- end --- Tabs vs spaces
 
 " change the mapleader from \ to ,
-let mapleader=","
+let mapleader=" "
 
 " Key for toggling paste
 set pastetoggle=<c-z>
@@ -142,6 +149,22 @@ set noswapfile      " No swap files
 set incsearch
 set hlsearch " Highlight all search results
 
+" relative linenumbers
+set relativenumber
+
 " fix on-save for php-cs-fixer plugin
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 
+" vim fugitive settings below
+set statusline =
+set statusline +=\ %{fugitive#statusline()}
+
+" remap :G to leader(space)gs
+nmap <leader>gs :G<CR>
+" Commands below used when merging conflicts
+" remap :diffget 2(left) -> leader-gf
+nmap <leader>gf :diffget //2<CR>
+
+" remap :diffget 3(left) -> leader-gj
+nmap <leader>gj :diffget //3<CR>
+nnoremap <leader>k :wincmd k<CR>
