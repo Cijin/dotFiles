@@ -11,7 +11,7 @@ Also the new font is just amazing with gruvebox theme for vimrc :)
 
 
 ## Installation:
-  * Install vim plug
+  * Install [vim-plug](https://github.com/junegunn/vim-plug)
   * Open ~/.vimrc file. Set paste mode :set paste
   * Copy / paste the config below to ~/.vimrc
   * Reload your new configs by running :source ~/.vimrc
