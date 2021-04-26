@@ -2,10 +2,8 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-
 " Make sure you use single quotes
-
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" Shorthand notation => fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
 " On-demand loading
@@ -28,10 +26,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Color themes
 " Plug 'arzg/vim-colors-xcode'
-Plug 'morhetz/gruvbox'
+Plug 'lifepillar/vim-gruvbox8'
 
-"Auto-pairs for brackets and quotes
+" Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
+
 
 " For php development
 Plug 'stephpy/vim-php-cs-fixer'
@@ -43,6 +42,19 @@ Plug 'tpope/vim-surround'
 " Vim-fugitive git plugin
 Plug 'tpope/vim-fugitive'
 
+" a tool to map through a files git history
+Plug 'tpope/vim-unimpaired'
+
+" vim air line (statusline)
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" NERD commenter
+Plug 'preservim/nerdcommenter'
+
+" close html-jsx tags
+Plug 'alvan/vim-closetag'
+
 "Initialize plugin system
 call plug#end()
 
@@ -50,28 +62,12 @@ call plug#end()
 " ------------------------------------------------------
 " ------------------------------------------------------
 " ---------------- START PLUGIN RELATED SECTION ------------
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
 
 syntax on
 " enable color scheme
 "colorscheme xcodedark
-colorscheme gruvbox
+colorscheme gruvbox8
 set background=dark    " Setting dark mode
-" --- END --- spaceduck color scheme
 
 " --- start --- NerdTree Settings
 map <C-n> :NERDTreeToggle<CR>
@@ -98,7 +94,7 @@ endfunction
 " --- start --- ctrlp Settings to search for files using ripgrep if available
 " https://github.com/BurntSushi/ripgrep
 if executable('rg')
-  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never'
+  let g:ctrlp_user_command = 'rg %s --files --hidden'
 endif
 
 " Files to ignore
@@ -110,15 +106,44 @@ let g:php_cs_fixer_path = "~/php-cs-fixer.phar" " define the path to the php-cs-
 let g:php_cs_fixer_rules = "@PSR2"
 let g:php_cs_fixer_php_path = "php"
 
+" airline theme
+let g:airline_powerline_fonts = 1
+let g:airline_theme='murmur'
 
 " ---------------- END PLUGIN RELATED SECTION ------------
 " ------------------------------------------------------
 " ------------------------------------------------------
 " ------------------------------------------------------
 
+" change the mapleader from \ to [Space],
+let mapleader=" "
 
-" Show linenumber
-set number
+" --- start --- Vim Fugitive
+
+set statusline =
+set statusline +=\ %{fugitive#statusline()}
+
+" vim fugitive settings below
+" remap :G to leader(space)gs
+nmap <leader>gs :G<CR>
+" Commands below used when merging conflicts
+" remap :diffget 2(left) -> leader-gf
+nmap <leader>gf :diffget //2<CR>
+
+" remap :diffget 3(left) -> leader-gj
+nmap <leader>gj :diffget //3<CR>
+nnoremap <leader>k :wincmd k<CR>
+
+" --- end --- Vim Fugitive
+
+" --- start --- Nerd Commenter
+
+let g:NERDCustomDelimiters = { 'js': { 'left': '/**','right': '*/' } }
+let g:NERDCustomDelimiters = { 'jsx': { 'left': '/**','right': '*/' } }
+let g:NERDCustomDelimiters = { 'ts': { 'left': '/**','right': '*/' } }
+let g:NERDCustomDelimiters = { 'tsx': { 'left': '/**','right': '*/' } }
+
+" --- end --- Nerd Commenter
 
 " --- start --- Tabs vs Spaces
 set expandtab       "Use softtabstop spaces instead of tab characters for indentation
@@ -130,9 +155,15 @@ set smartindent     "Automatically inserts indentation in some cases
 set cindent         "Like smartindent, but stricter and more customisable
 " --- end --- Tabs vs spaces
 
-" change the mapleader from \ to ,
-let mapleader=" "
+" --- start --- vim closetag
+let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue'
 
+" Shortcut for closing tags, default is '>'
+let g:closetag_shortcut = '>'
+" --- end --- Tabs vs spaces
+
+
+" --- end Plugin related section --- 
 " Key for toggling paste
 set pastetoggle=<c-z>
 
@@ -143,7 +174,8 @@ nmap <c-l> <c-w>l
 nmap <c-j> <c-w>j
 nmap <c-k> <c-w>k
 
-set noswapfile      " No swap files
+" No swap files 
+set noswapfile     
 
 " enable incremental search in vim
 set incsearch
@@ -155,16 +187,17 @@ set relativenumber
 " fix on-save for php-cs-fixer plugin
 autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 
-" vim fugitive settings below
-set statusline =
-set statusline +=\ %{fugitive#statusline()}
+" to work better with kitty
+let &t_ut=''
 
-" remap :G to leader(space)gs
-nmap <leader>gs :G<CR>
-" Commands below used when merging conflicts
-" remap :diffget 2(left) -> leader-gf
-nmap <leader>gf :diffget //2<CR>
+" Show linenumber
+set number
 
-" remap :diffget 3(left) -> leader-gj
-nmap <leader>gj :diffget //3<CR>
-nnoremap <leader>k :wincmd k<CR>
+" hide statusline line
+set noshowmode
+
+" enable mouse to scroll errors
+set mouse=a
+
+" required for nerd commenter
+filetype plugin on
