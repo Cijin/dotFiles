@@ -1,5 +1,5 @@
-# VimRcSettings
-My vimrc setting file as of 26 Oct 2020
+# VimRc Config
+My vimrc setting file as of 26 Apr 2020
 
 ### Updated on 12 Feb 2021:
 Vim fugitive
