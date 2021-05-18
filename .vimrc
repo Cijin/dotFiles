@@ -6,9 +6,6 @@
 
 call plug#begin('~/.vim/plugged')
 
-"code completion
-Plug 'codota/tabnine-vim'
-
 " Make sure you use single quotes
 " Shorthand notation => fetches https://github.com/junegunn/vim-easy-align
 
@@ -33,7 +30,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " :CocInstall coc-eslint coc-prettier
 
 " Color themes
-" Plug 'lifepillar/vim-gruvbox8'
 Plug 'sainnhe/everforest'
 
 " Auto-pairs for brackets and quotes
@@ -60,6 +56,9 @@ Plug 'tpope/vim-repeat'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" rainbow brackets
+Plug 'luochen1990/rainbow' 
+
 " NERD commenter
 Plug 'preservim/nerdcommenter'
 
@@ -83,6 +82,7 @@ syntax on
 if has('termguicolors')
   set termguicolors
 endif
+
 colorscheme everforest
 set background=dark    " Setting dark mode
 let g:everforest_background = 'hard'
@@ -128,7 +128,6 @@ let g:airline_theme = 'everforest'
 let mapleader=" "
 
 " --- start --- Vim Fugitive
-
 set statusline =
 set statusline +=\ %{fugitive#statusline()}
 
@@ -142,11 +141,13 @@ nmap <leader>gf :diffget //2<CR>
 " remap :diffget 3(left) -> leader-gj
 nmap <leader>gj :diffget //3<CR>
 nnoremap <leader>k :wincmd k<CR>
-
 " --- end --- Vim Fugitive
 
-" --- start --- Nerd Commenter
+" --- start --- Rainbow brackets
+let g:rainbow_active = 1 
+" --- end --- Rainbow brackets
 
+" --- start --- Nerd Commenter
 let g:NERDCustomDelimiters = { 'js': { 'left': '/*------------','right': '*/------------' } }
 let g:NERDCustomDelimiters = { 'jsx': { 'left': '/*------------','right': '*/------------' } }
 let g:NERDCustomDelimiters = { 'ts': { 'left': '/*------------','right': '*/------------' } }
@@ -213,8 +214,5 @@ set number
 " hide statusline line
 set noshowmode
 
-" enable mouse to scroll errors
-set mouse=a
-
-" always use the clipboard (from :help clipboard)
-set clipboard+=unnamedplus
+" open new tab
+nmap <leader>t :tabe<CR>
