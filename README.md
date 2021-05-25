@@ -1,6 +1,11 @@
 # VimRc Config
 My vimrc setting file as of 26 Apr 2020
 
+### Updated on May 2021:
+Git gutter
+Indent lines
+theme change
+
 ### Updated on 12 Feb 2021:
 Vim fugitive
 Relative lines
