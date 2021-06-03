@@ -17,9 +17,14 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" For JS Development
+" Ctrl P 
 Plug 'ctrlpvim/ctrlp.vim'
+
+" handles syntax for most languages
 Plug 'sheerun/vim-polyglot'
+
+" edge templating syntax
+Plug 'watzon/vim-edge-template'
 
 " COC
 " Use release branch (recommend)
@@ -29,8 +34,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " :CocInstall coc-tsserver coc-json coc-html coc-css
 " :CocInstall coc-eslint coc-prettier
 
+" for rails development
+Plug 'tpope/vim-rails'
+
+
 " Color themes
-Plug 'sainnhe/everforest'
+Plug 'sainnhe/sonokai'
 
 " Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -42,6 +51,9 @@ Plug 'tpope/vim-surround'
 
 " Vim-fugitive git plugin
 Plug 'tpope/vim-fugitive'
+
+" git gutter/ see changes in current file
+Plug 'airblade/vim-gitgutter'
 
 " commit browser, works with fugitive
 Plug 'junegunn/gv.vim'
@@ -55,9 +67,6 @@ Plug 'tpope/vim-repeat'
 " vim air line (statusline)
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-" rainbow brackets
-Plug 'luochen1990/rainbow' 
 
 " NERD commenter
 Plug 'preservim/nerdcommenter'
@@ -83,9 +92,10 @@ if has('termguicolors')
   set termguicolors
 endif
 
-colorscheme everforest
-set background=dark    " Setting dark mode
-let g:everforest_background = 'hard'
+let g:sonokai_better_performance = 1
+let g:sonokai_style = 'andromeda'
+let g:sonokai_enable_italic = 1
+colorscheme sonokai
 
 " --- start --- NerdTree Settings
 map <C-n> :NERDTreeToggle<CR>
@@ -121,7 +131,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
 
 " airline theme
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'everforest'
+let g:lightline = 'sonokai'
 
 
 " change the mapleader from \ to [Space],
@@ -143,15 +153,11 @@ nmap <leader>gj :diffget //3<CR>
 nnoremap <leader>k :wincmd k<CR>
 " --- end --- Vim Fugitive
 
-" --- start --- Rainbow brackets
-let g:rainbow_active = 1 
-" --- end --- Rainbow brackets
-
 " --- start --- Nerd Commenter
-let g:NERDCustomDelimiters = { 'js': { 'left': '/*------------','right': '*/------------' } }
-let g:NERDCustomDelimiters = { 'jsx': { 'left': '/*------------','right': '*/------------' } }
-let g:NERDCustomDelimiters = { 'ts': { 'left': '/*------------','right': '*/------------' } }
-let g:NERDCustomDelimiters = { 'tsx': { 'left': '/*------------','right': '*/------------' } }
+let g:NERDCustomDelimiters = { 'js': { 'left': '/*------------','right': '*/------------' }, 
+      \  'jsx': { 'left': '/*------------','right': '*/------------' } ,
+      \'ts': { 'left': '/*------------','right': '*/------------' }, 
+      \'tsx': { 'left': '/*------------','right': '*/------------' } }
 
 filetype plugin on
 " --- end --- Nerd Commenter
@@ -167,7 +173,7 @@ set cindent         "Like smartindent, but stricter and more customisable
 " --- end --- Tabs vs spaces
 
 " --- start --- vim closetag
-let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue'
+let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue,*.edge'
 
 " Shortcut for closing tags, default is '>'
 let g:closetag_shortcut = '>'
@@ -213,6 +219,9 @@ set number
 
 " hide statusline line
 set noshowmode
+
+" set mouse so as to scroll error pop-ups
+set mouse=a
 
 " open new tab
 nmap <leader>t :tabe<CR>
