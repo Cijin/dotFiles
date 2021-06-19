@@ -1,14 +1,11 @@
 " Specify a directory for plugins
-
 " - For Neovim: stdpath('data') . '/plugged'
-
 " - Avoid using standard Vim directory names like 'plugin'
-
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-" Shorthand notation => fetches https://github.com/junegunn/vim-easy-align
 
+" Shorthand notation => fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
 " On-demand loading
@@ -34,9 +31,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " :CocInstall coc-tsserver coc-json coc-html coc-css
 " :CocInstall coc-eslint coc-prettier
 
+" Ultisnips
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
+
 " for rails development
 Plug 'tpope/vim-rails'
-
 
 " Color themes
 Plug 'sainnhe/sonokai'
@@ -60,9 +60,6 @@ Plug 'junegunn/gv.vim'
 
 " a tool to map through a files git history
 Plug 'tpope/vim-unimpaired'
-
-" plugin to repeat prev command even after plugin map
-Plug 'tpope/vim-repeat'
 
 " vim air line (statusline)
 Plug 'vim-airline/vim-airline'
@@ -97,6 +94,15 @@ let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
 colorscheme sonokai
 
+" airline theme
+let g:airline_powerline_fonts = 1
+let g:lightline = 'sonokai'
+
+" indentline section --- start ---
+let g:indentLine_color_gui = '#595959'
+" indentline section --- end ---
+
+
 " --- start --- NerdTree Settings
 map <C-n> :NERDTreeToggle<CR>
 " --- END --- NerdTree
@@ -128,11 +134,6 @@ endif
 " Files to ignore
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
 " --- end --- ctrlp Settings
-
-" airline theme
-let g:airline_powerline_fonts = 1
-let g:lightline = 'sonokai'
-
 
 " change the mapleader from \ to [Space],
 let mapleader=" "
@@ -179,10 +180,8 @@ let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue,*.edge'
 let g:closetag_shortcut = '>'
 " --- end --- Tabs vs spaces
 
-" indentline section --- start ---
-let g:indentLine_color_gui = '#595959'
-" indentline section --- end ---
-
+" Trigger configuration (Optional)
+let g:UltiSnipsExpandTrigger="<C-l>"
 
 
 " ---------------- END PLUGIN RELATED SECTION ------------
@@ -225,3 +224,6 @@ set mouse=a
 
 " open new tab
 nmap <leader>t :tabe<CR>
+
+" vsplit
+nmap <leader>w :vsplit<CR>
