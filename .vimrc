@@ -5,17 +5,25 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 
+" lsp
+Plug 'neovim/nvim-lspconfig'
+Plug 'sumneko/lua-language-server'
+
 " Shorthand notation => fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
+" Telescope
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
+
+" Git worktree plugin
+Plug 'ThePrimeagen/git-worktree.nvim'
+
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-
-" Ctrl P 
-Plug 'ctrlpvim/ctrlp.vim'
 
 " handles syntax for most languages
 Plug 'sheerun/vim-polyglot'
@@ -31,15 +39,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " :CocInstall coc-tsserver coc-json coc-html coc-css
 " :CocInstall coc-eslint coc-prettier
 
-" Ultisnips
-Plug 'SirVer/ultisnips'
-Plug 'mlaursen/vim-react-snippets'
-
 " for rails development
 Plug 'tpope/vim-rails'
 
 " Color themes
-Plug 'sainnhe/sonokai'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -55,15 +59,8 @@ Plug 'tpope/vim-fugitive'
 " git gutter/ see changes in current file
 Plug 'airblade/vim-gitgutter'
 
-" commit browser, works with fugitive
-Plug 'junegunn/gv.vim'
-
-" a tool to map through a files git history
-Plug 'tpope/vim-unimpaired'
-
-" vim air line (statusline)
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" statusline
+Plug 'hoob3rt/lualine.nvim'
 
 " NERD commenter
 Plug 'preservim/nerdcommenter'
@@ -89,10 +86,13 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:sonokai_better_performance = 1
-let g:sonokai_style = 'andromeda'
-let g:sonokai_enable_italic = 1
-colorscheme sonokai
+colorscheme dracula
+
+" does what it says :D
+highlight Comment cterm=italic gui=italic
+
+" transparent bg (commented out as material theme supports it)
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 
 " airline theme
 let g:airline_powerline_fonts = 1
@@ -125,23 +125,10 @@ endfunction
 " <tab> could be remapped by another plugin, use :verbose imap <tab> to check if it's mapped as expected.
 " --- end --- COC Settings
 
-" --- start --- ctrlp Settings to search for files using ripgrep if available
-" https://github.com/BurntSushi/ripgrep
-if executable('rg')
-  let g:ctrlp_user_command = 'rg %s --files --hidden'
-endif
-
-" Files to ignore
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
-" --- end --- ctrlp Settings
-
 " change the mapleader from \ to [Space],
 let mapleader=" "
 
 " --- start --- Vim Fugitive
-set statusline =
-set statusline +=\ %{fugitive#statusline()}
-
 " vim fugitive settings below
 " remap :G to leader(space)gs
 nmap <leader>gs :G<CR>
@@ -180,8 +167,18 @@ let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue,*.edge'
 let g:closetag_shortcut = '>'
 " --- end --- Tabs vs spaces
 
-" Trigger configuration (Optional)
-let g:UltiSnipsExpandTrigger="<C-l>"
+" Telescope remaps
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+nnoremap <C-p> :lua require('telescope.builtin').git_files()<CR>
+nnoremap <Leader>pf :lua require('telescope.builtin').find_files()<CR>
+nnoremap <leader>pj :lua require('telescope.builtin').jumplist()<CR>
+
+nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
+nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
+nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
+nnoremap <leader>gc :lua require('telescope.builtin').git_branches()<CR>
+nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
+nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
 
 " ---------------- END PLUGIN RELATED SECTION ------------
@@ -210,11 +207,14 @@ set hlsearch " Highlight all search results
 " relative linenumbers
 set relativenumber
 
+" Show linenumber
+set number
+
 " to work better with kitty
 let &t_ut=''
 
-" Show linenumber
-set number
+" start scrolling 8 lines before bottom of file
+set scrolloff=12
 
 " hide statusline line
 set noshowmode
