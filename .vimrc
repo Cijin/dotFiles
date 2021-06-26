@@ -43,7 +43,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-rails'
 
 " Color themes
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'sainnhe/gruvbox-material'
 
 " Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -86,13 +86,14 @@ if has('termguicolors')
   set termguicolors
 endif
 
-colorscheme dracula
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_show_eob = 0
+set background=dark
+colorscheme gruvbox-material
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
-
-" transparent bg (commented out as material theme supports it)
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 
 " airline theme
 let g:airline_powerline_fonts = 1
@@ -115,6 +116,11 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" jump to definition
+nmap <leader>gd <Plug>(coc-definition)
+" jump to references
+nmap <leader>gr <Plug>(coc-references)
 
 function! s:check_back_space() abort
   let col = col('.') - 1
