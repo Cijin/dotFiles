@@ -78,6 +78,7 @@ ZSH_THEME="cj-custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
+plugins=(git vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,6 +107,9 @@ source ~/.myShCommands/.makedir.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+# ------------------------------------------------------------------ Start Alias Section ----------------------------------------------------- #
+
+
 source /home/cijin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -120,12 +124,71 @@ export NVM_DIR="$HOME/.nvm"
 # alias for update and upgrade
 alias apt-up='sudo apt-get update && sudo apt-get upgrade'
 alias resetAudio='pulseaudio -k && sudo alsa force-reload'
-alias vimrc='vim ~/.vimrc'
-alias zshrc='vim ~/.zshrc'
+alias vimrc='vi ~/.vimrc'
+alias zshrc='vi ~/.zshrc'
 alias gitlog='git log --graph --pretty=format:"%h - %an, %ar : %s"'
+alias docker-rails='sudo docker-compose up -d && rails s'
 
 # alias for clearing screen
 alias c='clear'
+
+# --------------------------- Start nx alias section --------------------------- #
+
+# nx generate component
+function nx-g() {
+  if [[ -z "$2" ]] ; then
+    echo "nx-g requires two arguments. 1.Component-Name 2.project. In that order. :)"
+
+  else
+    nx generate @nrwl/react:component --name=$1 --project=$2 --style=none --pascalCaseDirectory --pascalCaseFiles 
+  fi
+}
+
+# nx generate component interactive in specific folder if needed
+function nx-gi() {
+  if [[ -z "$1" ]] ; then
+    echo "nx-gi requires project-name as an argument"
+
+  else
+    nx g c --interactive --project=$1 --directory $2 --pascalCaseDirectory --pascalCaseFiles --style=none
+  fi
+}
+
+# nx generate module
+function nx-gm() {
+  if [[ -z "$2" ]] ; then
+    echo "nx-gm requires two arguments. 1.module-name 2.project. In that order. :)"
+
+  else
+    nx generate @nrwl/react:component --name=$1 --project=$2 --style=none
+  fi
+}
+
+# nx generate stories alias
+function nx-s() {
+  if [[ -z "$1" ]] ; then
+    echo "nx-s requires project-name as an argument."
+
+  else
+    nx generate @nrwl/react:stories --project=$1
+  fi
+}
+
+# nx run storybook
+# if no args are provided it rull run the shared-components by default
+function nx-rs() {
+  if [[ -z "$1" ]] ; then
+    nx run shared-components:storybook
+
+  else
+    nx run $1:storybook
+  fi
+}
+
+# --------------------------- End nx alias section --------------------------- #
+
+
+# ------------------------------------------------------------------ End Alias Section ----------------------------------------------------- #
 
 # ANDROID_HOME env variables (React Native)
 export ANDROID_HOME=$HOME/Android/Sdk
@@ -138,19 +201,21 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export DENO_INSTALL="/home/cijin/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
+# Golang
+export PATH=$PATH:/usr/local/go/bin
+
 
 # Kitty Terminal
 # prevent unknown terminal problem when ssh'ing
 alias ssh="kitty +kitten ssh"
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 fpath=($fpath "/home/cijin/.zfunctions")
 
   # Set Spaceship ZSH as a prompt
-  autoload -U promptinit; promptinit
-  prompt spaceship
+autoload -U promptinit; promptinit
+prompt spaceship
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/bin:$PATH"

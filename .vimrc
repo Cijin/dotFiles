@@ -5,6 +5,9 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 
+" Vim-Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " lsp
 Plug 'neovim/nvim-lspconfig'
 Plug 'sumneko/lua-language-server'
@@ -43,7 +46,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-rails'
 
 " Color themes
-Plug 'sainnhe/gruvbox-material'
+Plug 'wuelnerdotexe/vim-enfocado'
 
 " Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -52,6 +55,9 @@ Plug 'jiangmiao/auto-pairs'
 " Surround use cs (change surrounding) to change 
 " quotes or tags surrounding a word or line
 Plug 'tpope/vim-surround'
+
+" Repeat.vim remaps . in a way that plugins can tap into it.
+Plug 'tpope/vim-repeat'
 
 " Vim-fugitive git plugin
 Plug 'tpope/vim-fugitive'
@@ -71,6 +77,9 @@ Plug 'alvan/vim-closetag'
 " displaying thin vertical lines where code indented with spaces
 Plug 'yggdroot/indentline'
 
+" vim wiki
+Plug 'vimwiki/vimwiki'
+
 "Initialize plugin system
 call plug#end()
 
@@ -86,23 +95,10 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_show_eob = 0
-set background=dark
-colorscheme gruvbox-material
+colorscheme enfocado
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
-
-" airline theme
-let g:airline_powerline_fonts = 1
-let g:lightline = 'sonokai'
-
-" indentline section --- start ---
-let g:indentLine_color_gui = '#595959'
-" indentline section --- end ---
-
 
 " --- start --- NerdTree Settings
 map <C-n> :NERDTreeToggle<CR>
@@ -110,17 +106,41 @@ map <C-n> :NERDTreeToggle<CR>
 
 " --- start --- COC Settings
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources
-" use <tab> for trigger completion and navigate to the next complete item
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " jump to definition
 nmap <leader>gd <Plug>(coc-definition)
 " jump to references
 nmap <leader>gr <Plug>(coc-references)
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+
+" use <tab> for trigger completion and navigate to the next complete item
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -193,7 +213,7 @@ nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git
 " ------------------------------------------------------
 
 
-" Key for toggling paste
+" Key for toggling set paste
 set pastetoggle=<c-z>
 
 " Source - https://vim.fandom.com/wiki/Switch_between_Vim_window_splits_easily
@@ -228,8 +248,27 @@ set noshowmode
 " set mouse so as to scroll error pop-ups
 set mouse=a
 
+" save undo trees in files
+set undofile
+set undodir=~/.vim/undodir
+
+" number of saved undo
+set undolevels=10000
+
+" required for vimwiki
+set nocompatible
+
 " open new tab
 nmap <leader>t :tabe<CR>
 
 " vsplit
 nmap <leader>w :vsplit<CR>
+
+" vnew and close other tab
+nmap <leader>n :vnew \| on<CR>
+
+" add missing imports on save (Go)
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+" map leader y to save register plus ( clipboard )
+vnoremap <leader>y "+y<ESC>
