@@ -77,7 +77,7 @@ Plug 'alvan/vim-closetag'
 " displaying thin vertical lines where code indented with spaces
 Plug 'yggdroot/indentline'
 
-" vim wiki
+" vimwiki
 Plug 'vimwiki/vimwiki'
 
 "Initialize plugin system
@@ -206,6 +206,13 @@ nnoremap <leader>gc :lua require('telescope.builtin').git_branches()<CR>
 nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
 nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
+
+" vimwiki settings
+let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
+          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.md',
+          \ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
+          \ 'html_filename_parameterization': 1,
+          \ 'template_ext': '.tpl'}]
 
 " ---------------- END PLUGIN RELATED SECTION ------------
 " ------------------------------------------------------
