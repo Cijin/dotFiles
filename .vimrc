@@ -8,12 +8,16 @@ call plug#begin('~/.vim/plugged')
 " Vim-Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" lsp
-Plug 'neovim/nvim-lspconfig'
-Plug 'sumneko/lua-language-server'
-
 " Shorthand notation => fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
+
+" COC
+" Use release branch (recommend)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" AFTERWARDS!!!!
+" RUN IN VIM----
+" :CocInstall coc-tsserver coc-json coc-html coc-css
+" :CocInstall coc-eslint coc-prettier
 
 " Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -21,6 +25,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'fannheyward/telescope-coc.nvim'
+Plug 'ThePrimeagen/harpoon'
 
 " Git worktree plugin
 Plug 'ThePrimeagen/git-worktree.nvim'
@@ -34,19 +39,15 @@ Plug 'sheerun/vim-polyglot'
 " edge templating syntax
 Plug 'watzon/vim-edge-template'
 
-" COC
-" Use release branch (recommend)
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" AFTERWARDS!!!!
-" RUN IN VIM----
-" :CocInstall coc-tsserver coc-json coc-html coc-css
-" :CocInstall coc-eslint coc-prettier
-
 " for rails development
 Plug 'tpope/vim-rails'
 
 " Color themes
-Plug 'wuelnerdotexe/vim-enfocado'
+Plug 'sainnhe/everforest'
+   
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
+
 
 " Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -66,7 +67,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " statusline
-Plug 'hoob3rt/lualine.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 
 " NERD commenter
 Plug 'preservim/nerdcommenter'
@@ -90,12 +91,23 @@ call plug#end()
 
 syntax on
 
-" enable color scheme
-if has('termguicolors')
-  set termguicolors
+if &term =~ '256color'
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+    set t_ut=
 endif
 
-colorscheme enfocado
+
+set termguicolors
+set background=dark
+let g:everforest_background = 'hard'
+let g:everforest_enable_italic = 1
+let g:everforest_ui_contrast = 'high'
+let g:everforest_diagnostic_text_highlight = 1
+let g:everforest_better_performance = 1
+
+colorscheme everforest
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
@@ -129,27 +141,6 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
-
-" use <tab> for trigger completion and navigate to the next complete item
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" DEBUGGING -
-" <tab> could be remapped by another plugin, use :verbose imap <tab> to check if it's mapped as expected.
-" --- end --- COC Settings
 
 " change the mapleader from \ to [Space],
 let mapleader=" "
@@ -206,13 +197,45 @@ nnoremap <leader>gc :lua require('telescope.builtin').git_branches()<CR>
 nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
 nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
+" --- start --- Harpoon
+nnoremap <leader>m :lua require("harpoon.mark").add_file()<CR>
+nnoremap <C-e> :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>tc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
+
+nnoremap <leader>f :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>r :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>t :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>g :lua require("harpoon.ui").nav_file(4)<CR>
+" --- end --- Harpoon
+
 
 " vimwiki settings
-let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
-          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.md',
-          \ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
-          \ 'html_filename_parameterization': 1,
-          \ 'template_ext': '.tpl'}]
+let g:vimwiki_list = [{
+  \ 'automatic_nested_syntaxes':1,
+  \ 'path': '$HOME/vimwiki/content',
+  \ 'syntax': 'markdown',
+  \ 'ext':'.md',
+  \ 'template_default':'markdown',
+\}]
+
+" --- start --- COC Settings
+" https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources
+
+" use <tab> for trigger completion and navigate to the next complete item
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" DEBUGGING -
+" <tab> could be remapped by another plugin, use :verbose imap <tab> to check if it's mapped as expected.
+" --- end --- COC Settings
 
 " ---------------- END PLUGIN RELATED SECTION ------------
 " ------------------------------------------------------
@@ -220,8 +243,18 @@ let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/template
 " ------------------------------------------------------
 
 
-" Key for toggling set paste
-set pastetoggle=<c-z>
+" Change cursor type based on mode
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+  au InsertEnter,InsertChange *
+    \ if v:insertmode == 'i' | 
+    \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+    \ elseif v:insertmode == 'r' |
+    \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+    \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
+
 
 " Source - https://vim.fandom.com/wiki/Switch_between_Vim_window_splits_easily
 set wmw=0           " do not display current line of each minimized file
@@ -265,9 +298,6 @@ set undolevels=10000
 " required for vimwiki
 set nocompatible
 
-" open new tab
-nmap <leader>t :tabe<CR>
-
 " vsplit
 nmap <leader>w :vsplit<CR>
 
@@ -279,3 +309,11 @@ autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.org
 
 " map leader y to save register plus ( clipboard )
 vnoremap <leader>y "+y<ESC>
+
+" go lint
+set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
+
+" set column line at 80 characters
+:hi ColorColumn guibg=#2d2d2d ctermbg=246
+set textwidth=80
+set colorcolumn=+1
