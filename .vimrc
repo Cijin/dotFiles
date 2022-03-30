@@ -5,6 +5,9 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 
+" Dart
+Plug 'dart-lang/dart-vim-plugin'
+
 " Vim-Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 

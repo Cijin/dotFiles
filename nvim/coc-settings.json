@@ -1,1 +1,11 @@
-/home/cijin/.vim/coc-settings.json
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "tsserver.formatOnType": true,
+  "coc.preferences.formatOnType": true,
+  "javascript.validate.enable": false
+}
