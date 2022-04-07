@@ -145,7 +145,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-" change the mapleader from \ to [Space],
+" change the leader to [Space],
 let mapleader=" "
 
 " --- start --- Vim Fugitive
@@ -181,7 +181,7 @@ set cindent         "Like smartindent, but stricter and more customisable
 " --- end --- Tabs vs spaces
 
 " --- start --- vim closetag
-let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue,*.edge'
+let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue,*.edge, *.gohtml'
 
 " Shortcut for closing tags, default is '>'
 let g:closetag_shortcut = '>'
@@ -300,6 +300,10 @@ set undolevels=10000
 
 " required for vimwiki
 set nocompatible
+
+" use space instead of tab for indentline, as conflicts with vim-go
+" there is a [space] at the end, this is intentional
+set list lcs=tab:\¦\ 
 
 " vsplit
 nmap <leader>w :vsplit<CR>
