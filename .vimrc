@@ -29,6 +29,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'fannheyward/telescope-coc.nvim'
 Plug 'ThePrimeagen/harpoon'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Git worktree plugin
 Plug 'ThePrimeagen/git-worktree.nvim'
@@ -46,11 +47,7 @@ Plug 'watzon/vim-edge-template'
 Plug 'tpope/vim-rails'
 
 " Color themes
-Plug 'sainnhe/everforest'
-   
-" If you want to have icons in your statusline choose one of these
-Plug 'kyazdani42/nvim-web-devicons'
-
+Plug 'olimorris/onedarkpro.nvim'
 
 " Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -104,13 +101,8 @@ endif
 
 set termguicolors
 set background=dark
-let g:everforest_background = 'hard'
-let g:everforest_enable_italic = 1
-let g:everforest_ui_contrast = 'high'
-let g:everforest_diagnostic_text_highlight = 1
-let g:everforest_better_performance = 1
 
-colorscheme everforest
+colorscheme onedarkpro
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
