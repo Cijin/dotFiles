@@ -313,6 +313,6 @@ vnoremap <leader>y "+y<ESC>
 set rtp+=$GOPATH/src/golang.org/x/lint/misc/vim
 
 " set column line at 80 characters
-:hi ColorColumn guibg=#2d2d2d ctermbg=246
+:hi ColorColumn guibg=#3b3d3f ctermbg=246
 set textwidth=80
 set colorcolumn=+1
