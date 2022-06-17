@@ -47,7 +47,7 @@ Plug 'watzon/vim-edge-template'
 Plug 'tpope/vim-rails'
 
 " Color themes
-Plug 'olimorris/onedarkpro.nvim'
+Plug 'mrjones2014/lighthaus.nvim'
 
 " Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -102,7 +102,7 @@ endif
 set termguicolors
 set background=dark
 
-colorscheme onedarkpro
+colorscheme lighthaus
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
