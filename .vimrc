@@ -47,7 +47,10 @@ Plug 'watzon/vim-edge-template'
 Plug 'tpope/vim-rails'
 
 " Color themes
-Plug 'mrjones2014/lighthaus.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
+" cursor line
+Plug 'yamatsum/nvim-cursorline'
 
 " Auto-pairs for brackets and quotes
 Plug 'jiangmiao/auto-pairs'
@@ -102,7 +105,7 @@ endif
 set termguicolors
 set background=dark
 
-colorscheme lighthaus
+colorscheme tokyonight
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
@@ -113,8 +116,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 " --- start --- COC Settings
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources
-
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " jump to definition
 nmap <leader>gd <Plug>(coc-definition)
@@ -173,7 +174,7 @@ set cindent         "Like smartindent, but stricter and more customisable
 " --- end --- Tabs vs spaces
 
 " --- start --- vim closetag
-let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue,*.edge, *.gohtml'
+let g:closetag_filenames = '*.html,*.tsx,*.jsx,*.vue,*.edge, *.gohtml, *.go'
 
 " Shortcut for closing tags, default is '>'
 let g:closetag_shortcut = '>'
@@ -216,17 +217,17 @@ let g:vimwiki_list = [{
 " --- start --- COC Settings
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources
 
-" use <tab> for trigger completion and navigate to the next complete item
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+  " Insert <tab> when previous text is space, refresh completion if not.
+  inoremap <silent><expr> <TAB>
+	\ coc#pum#visible() ? coc#pum#next(1):
+	\ <SID>check_back_space() ? "\<Tab>" :
+	\ coc#refresh()
+  inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " DEBUGGING -
 " <tab> could be remapped by another plugin, use :verbose imap <tab> to check if it's mapped as expected.
@@ -305,6 +306,9 @@ nmap <leader>n :vnew \| on<CR>
 
 " add missing imports on save (Go)
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+" go template highlight
+au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 
 " map leader y to save register plus ( clipboard )
 vnoremap <leader>y "+y<ESC>
