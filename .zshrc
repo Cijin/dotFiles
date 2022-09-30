@@ -1,23 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-# Postgresql
-PATH=/usr/local/pgsql/bin:$PATH
-export PATH
-
-# brew
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-# Composer
-export PATH=$HOME/.config/composer/vendor/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/cijin/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="cj-custom"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -32,14 +23,13 @@ ZSH_THEME="cj-custom"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -54,7 +44,10 @@ ZSH_THEME="cj-custom"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-#COMPLETION_WAITING_DOTS="true"
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -77,13 +70,12 @@ ZSH_THEME="cj-custom"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-plugins=(git vi-mode)
+plugins=(git git-prompt aliases vi-mode zsh-syntax-highlighting ripgrep)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-source ~/.myShCommands/.makedir.sh
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -107,116 +99,20 @@ source ~/.myShCommands/.makedir.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# ------------------------------------------------------------------ Start Alias Section ----------------------------------------------------- #
 
+# go!
+export PATH=$PATH:/usr/local/go/bin
 
-source /home/cijin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# nvim alias
+alias vi="~/./nvim.appimage"
+alias nvim="~/./nvim.appimage"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# setting chromium (did this as I ran into problems running the paypal test)
-#export CHROME_BIN=/usr/bin/chromium-browser
-
-# alias for update and upgrade
-alias apt-up='sudo apt-get update && sudo apt-get upgrade'
-alias resetAudio='pulseaudio -k && sudo alsa force-reload'
-alias vimrc='vi ~/.vimrc'
-alias zshrc='vi ~/.zshrc'
-alias gitlog='git log --graph --pretty=format:"%h - %an, %ar : %s"'
-alias docker-rails='sudo docker-compose up -d && rails s'
-
-# alias for clearing screen
-alias c='clear'
-
-# --------------------------- Start nx alias section --------------------------- #
-
-# nx generate component
-function nx-g() {
-  if [[ -z "$2" ]] ; then
-    echo "nx-g requires two arguments. 1.Component-Name 2.project. In that order. :)"
-
-  else
-    nx generate @nrwl/react:component --name=$1 --project=$2 --style=none --pascalCaseDirectory --pascalCaseFiles 
-  fi
-}
-
-# nx generate component interactive in specific folder if needed
-function nx-gi() {
-  if [[ -z "$1" ]] ; then
-    echo "nx-gi requires project-name as an argument"
-
-  else
-    nx g c --interactive --project=$1 --directory $2 --pascalCaseDirectory --pascalCaseFiles --style=none
-  fi
-}
-
-# nx generate module
-function nx-gm() {
-  if [[ -z "$2" ]] ; then
-    echo "nx-gm requires two arguments. 1.module-name 2.project. In that order. :)"
-
-  else
-    nx generate @nrwl/react:component --name=$1 --project=$2 --style=none
-  fi
-}
-
-# nx generate stories alias
-function nx-s() {
-  if [[ -z "$1" ]] ; then
-    echo "nx-s requires project-name as an argument."
-
-  else
-    nx generate @nrwl/react:stories --project=$1
-  fi
-}
-
-# nx run storybook
-# if no args are provided it rull run the shared-components by default
-function nx-rs() {
-  if [[ -z "$1" ]] ; then
-    nx run shared-components:storybook
-
-  else
-    nx run $1:storybook
-  fi
-}
-
-# --------------------------- End nx alias section --------------------------- #
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 
-# ------------------------------------------------------------------ End Alias Section ----------------------------------------------------- #
-
-# ANDROID_HOME env variables (React Native)
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-# Deno
-export DENO_INSTALL="/home/cijin/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
-# Golang
-export PATH=$PATH:/usr/local/go/bin
-
-
-# Kitty Terminal
-# prevent unknown terminal problem when ssh'ing
-alias ssh="kitty +kitten ssh"
-autoload -Uz compinit && compinit
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
-fpath=($fpath "/home/cijin/.zfunctions")
-
-  # Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
