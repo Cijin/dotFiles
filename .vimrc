@@ -1,12 +1,4 @@
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-
-" Make sure you use single quotes
-
-" Dart
-Plug 'dart-lang/dart-vim-plugin'
 
 " Vim-Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -40,14 +32,8 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " handles syntax for most languages
 Plug 'sheerun/vim-polyglot'
 
-" edge templating syntax
-Plug 'watzon/vim-edge-template'
-
-" for rails development
-Plug 'tpope/vim-rails'
-
 " Color themes
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'VDuchauffour/neodark.nvim'
 
 " cursor line
 Plug 'yamatsum/nvim-cursorline'
@@ -81,8 +67,11 @@ Plug 'alvan/vim-closetag'
 " displaying thin vertical lines where code indented with spaces
 Plug 'yggdroot/indentline'
 
-" vimwiki
-Plug 'vimwiki/vimwiki'
+" closure-vim
+Plug 'tpope/vim-dispatch'
+Plug 'clojure-vim/vim-jack-in'
+" Only in Neovim:
+Plug 'radenling/vim-dispatch-neovim'
 
 "Initialize plugin system
 call plug#end()
@@ -105,7 +94,7 @@ endif
 set termguicolors
 set background=dark
 
-colorscheme tokyonight
+colorscheme neodark
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
