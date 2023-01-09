@@ -19,21 +19,23 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'fannheyward/telescope-coc.nvim'
-Plug 'ThePrimeagen/harpoon'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'fannheyward/telescope-coc.nvim'
+
+" harpoon - file switcher kindof
+Plug 'ThePrimeagen/harpoon'
+
+" NerdTree
+Plug 'preservim/nerdtree'
 
 " Git worktree plugin
 Plug 'ThePrimeagen/git-worktree.nvim'
-
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
 " handles syntax for most languages
 Plug 'sheerun/vim-polyglot'
 
 " Color themes
-Plug 'VDuchauffour/neodark.nvim'
+Plug 'wittyjudge/gruvbox-material.nvim'
 
 " cursor line
 Plug 'yamatsum/nvim-cursorline'
@@ -67,12 +69,6 @@ Plug 'alvan/vim-closetag'
 " displaying thin vertical lines where code indented with spaces
 Plug 'yggdroot/indentline'
 
-" closure-vim
-Plug 'tpope/vim-dispatch'
-Plug 'clojure-vim/vim-jack-in'
-" Only in Neovim:
-Plug 'radenling/vim-dispatch-neovim'
-
 "Initialize plugin system
 call plug#end()
 
@@ -94,7 +90,8 @@ endif
 set termguicolors
 set background=dark
 
-colorscheme neodark
+set background=dark 
+colorscheme gruvbox-material
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
@@ -156,6 +153,7 @@ nnoremap <leader>pw :lua require('telescope.builtin').grep_string { search = vim
 nnoremap <leader>pb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>gc :lua require('telescope.builtin').git_branches()<CR>
+
 nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
 nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
@@ -170,15 +168,6 @@ nnoremap <leader>t :lua require("harpoon.ui").nav_file(3)<CR>
 nnoremap <leader>g :lua require("harpoon.ui").nav_file(4)<CR>
 " --- end --- Harpoon
 
-
-" vimwiki settings
-let g:vimwiki_list = [{
-  \ 'automatic_nested_syntaxes':1,
-  \ 'path': '$HOME/vimwiki/content',
-  \ 'syntax': 'markdown',
-  \ 'ext':'.md',
-  \ 'template_default':'markdown',
-\}]
 
 " --- start --- COC Settings
 " https://github.com/neoclide/coc.nvim/wiki/Completion-with-sources
@@ -252,13 +241,6 @@ if has("autocmd")
 endif
 
 
-" Source - https://vim.fandom.com/wiki/Switch_between_Vim_window_splits_easily
-set wmw=0           " do not display current line of each minimized file
-nmap <c-h> <c-w>h
-nmap <c-l> <c-w>l
-nmap <c-j> <c-w>j
-nmap <c-k> <c-w>k
-
 " No swap files 
 set noswapfile     
 
@@ -271,9 +253,6 @@ set relativenumber
 
 " Show linenumber
 set number
-
-" to work better with kitty
-let &t_ut=''
 
 " start scrolling 8 lines before bottom of file
 set scrolloff=12
@@ -291,18 +270,12 @@ set undodir=~/.vim/undodir
 " number of saved undo
 set undolevels=10000
 
-" required for vimwiki
-set nocompatible
-
 " use space instead of tab for indentline, as conflicts with vim-go
 " there is a [space] at the end, this is intentional
 set list lcs=tab:\¦\ 
 
 " vsplit
 nmap <leader>w :vsplit<CR>
-
-" vnew and close other tab
-nmap <leader>n :vnew \| on<CR>
 
 " add missing imports on save (Go)
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
