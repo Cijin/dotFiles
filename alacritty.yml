@@ -1,30 +1,30 @@
 colors:
   # Default colors
   primary:
-    background: '0x1e222a'
-    foreground: '0xabb2bf'
+    background: "0x1e222a"
+    foreground: "0xabb2bf"
 
   # Normal colors
   normal:
-    black:   '0x181a1f'
-    red:     '0xe06c75'
-    green:   '0x98c379'
-    yellow:  '0xe5c07b'
-    blue:    '0x61afef'
-    magenta: '0xcc626a'
-    cyan:    '0x56b6c2'
-    white:   '0xc9c9c9'
+    black: "0x181a1f"
+    red: "0xe06c75"
+    green: "0x98c379"
+    yellow: "0xe5c07b"
+    blue: "0x61afef"
+    magenta: "0xcc626a"
+    cyan: "0x56b6c2"
+    white: "0xc9c9c9"
 
   # Bright colors
   bright:
-    black:   '0x1f1f25'
-    red:     '0xec5f67'
-    green:   '0x89b06d'
-    yellow:  '0xebae34'
-    blue:    '0x1b1f27'
-    magenta: '0xc678dd'
-    cyan:    '0x40d9ff'
-    white:   '0xdedede'
+    black: "0x1f1f25"
+    red: "0xec5f67"
+    green: "0x89b06d"
+    yellow: "0xebae34"
+    blue: "0x1b1f27"
+    magenta: "0xc678dd"
+    cyan: "0x40d9ff"
+    white: "0xdedede"
 
 font:
   # Normal (roman) font face
@@ -35,7 +35,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux) Fira Sans Book
     #   - (Windows) Consolas
-    family: FantasqueSansMono Nerd Font
+    family: Inconsolata
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -46,7 +46,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: FantasqueSansMono Nerd Font
+    family: Inconsolata
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -57,7 +57,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: FantasqueSansMono Nerd Font
+    family: Inconsolata
 
     # The `style` can be specified to pick a specific face.
     style: Italic

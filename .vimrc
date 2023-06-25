@@ -3,6 +3,9 @@ call plug#begin('~/.vim/plugged')
 " Vim-Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" Postgres Vim
+Plug 'lifepillar/pgsql.vim' 
+
 " Shorthand notation => fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 
@@ -219,8 +222,16 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
-
 " --- end --- COC Settings
+
+" --- start --- pgsql
+let g:sql_type_default = 'pgsql'
+" --- end --- pgsql
+
+" --- start --- vim-go
+let g:go_fmt_command="gopls"
+let g:go_gopls_gofumpt=1
+" --- end --- vim-go
 
 " ---------------- END PLUGIN RELATED SECTION ------------
 " ------------------------------------------------------
