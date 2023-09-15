@@ -3,6 +3,9 @@ call plug#begin('~/.vim/plugged')
 " Vim-Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" Vimspector - multi language graphical debugger
+Plug 'puremourning/vimspector'
+
 " Postgres Vim
 Plug 'lifepillar/pgsql.vim' 
 
@@ -98,6 +101,11 @@ colorscheme gruvbox-material
 
 " does what it says :D
 highlight Comment cterm=italic gui=italic
+
+" --- start --- Vimspector Settings
+let g:vimspector_enable_mappings = 'HUMAN'
+" --- END --- Vimspector
+
 
 " --- start --- NerdTree Settings
 map <C-n> :NERDTreeToggle<CR>
