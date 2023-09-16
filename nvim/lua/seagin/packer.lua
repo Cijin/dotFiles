@@ -26,6 +26,7 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
   use('yggdroot/indentline')
+  use('ray-x/go.nvim')
 
   use {
   'VonHeikemen/lsp-zero.nvim',

@@ -28,3 +28,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+
+-- attempt to format on save
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
