@@ -28,6 +28,7 @@ return require('packer').startup(function(use)
   use('tpope/vim-surround')
   use('yggdroot/indentline')
   use('ray-x/go.nvim')
+  use('nvim-treesitter/nvim-treesitter-context')
 
   use {
   'VonHeikemen/lsp-zero.nvim',
