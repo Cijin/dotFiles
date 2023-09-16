@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 vim.opt.guicursor = ""
 
 vim.opt.nu = true
@@ -22,7 +23,7 @@ vim.opt.hlsearch = true
 
 vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 12
+vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
