@@ -1,2 +1,2 @@
-require("seagin.remap")
 require("seagin.set")
+require("seagin.remap")
