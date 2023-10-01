@@ -16,9 +16,6 @@ return require('packer').startup(function(use)
   use ({
 	  'rose-pine/neovim',
 	  as = 'rose-pine',
-	  config = function()
-		  vim.cmd('colorscheme rose-pine')
-	  end
   })
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
@@ -26,9 +23,8 @@ return require('packer').startup(function(use)
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
   use('tpope/vim-surround')
-  use('yggdroot/indentline')
   use('ray-x/go.nvim')
-  use('nvim-treesitter/nvim-treesitter-context')
+  use 'github/copilot.vim'
 
   use {
   'VonHeikemen/lsp-zero.nvim',

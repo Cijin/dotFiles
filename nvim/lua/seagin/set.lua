@@ -26,9 +26,10 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 
-vim.opt.updatetime = 50
-
 vim.opt.colorcolumn = "80"
 
--- attempt to format on save
-vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+vim.opt.updatetime = 50
+
+vim.api.nvim_exec([[
+    autocmd BufWritePre * lua vim.lsp.buf.format()
+]], false)
