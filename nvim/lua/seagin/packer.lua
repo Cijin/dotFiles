@@ -13,10 +13,7 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use ({
-	  'rose-pine/neovim',
-	  as = 'rose-pine',
-  })
+  use { "ellisonleao/gruvbox.nvim" }
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use('ThePrimeagen/harpoon')
@@ -24,7 +21,6 @@ return require('packer').startup(function(use)
   use('tpope/vim-fugitive')
   use('tpope/vim-surround')
   use('ray-x/go.nvim')
-  use 'github/copilot.vim'
 
   use {
   'VonHeikemen/lsp-zero.nvim',
