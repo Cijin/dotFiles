@@ -31,5 +31,5 @@ vim.opt.colorcolumn = "80"
 vim.opt.updatetime = 50
 
 vim.api.nvim_exec([[
-    autocmd BufWritePre * lua vim.lsp.buf.format()
+    autocmd BufWritePre *.{!.go} lua vim.lsp.buf.format()
 ]], false)
