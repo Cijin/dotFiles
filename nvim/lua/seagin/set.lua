@@ -19,11 +19,15 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.incsearch = true
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
+
+vim.opt.ignorecase = true				-- enable case insensitive searching
+vim.opt.smartcase = true				-- all searches are case insensitive unless there's a capital letter
 
 vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 10				-- scroll page when cursor is 10 lines from top/bottom
+vim.opt.sidescrolloff = 8				-- scroll page when cursor is 8 spaces from left/right
 vim.opt.signcolumn = "yes"
 
 vim.opt.colorcolumn = "80"

@@ -32,7 +32,7 @@ lsp.set_preferences({
     }
 })
 
-lsp.on_attach = (function(client, bufnr)
+lsp.on_attach(function(client, bufnr)
   -- see :help lsp-zero-keybindings
   -- to learn the available actions
   local opts = {buffer = bufnr, remap = false}
