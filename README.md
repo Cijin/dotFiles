@@ -14,31 +14,47 @@ Relative lines
 Now also includes the hyper config, figured I wouldn't be using one without the other.
 Also the new font is just amazing with gruvebox theme for vimrc :)
 
+### Major Re write on October 2023
+Re-wrote everything in `lua`. Moved to lsp, removed a lot of plugins, down to a very few 
+that I actually use on a daily basis. Moving to lsp was a great idea. Installation is much 
+easier too.
 
-## Installation:
-  * Install [vim-plug](https://github.com/junegunn/vim-plug)
-  * Open ~/.vimrc file. Set paste mode :set paste
-  * Copy / paste the config below to ~/.vimrc
-  * Reload your new configs by running :source ~/.vimrc
-  * Run `:PlugInstall`
-  * Run `:CocInstall coc-tsserver coc-json coc-html coc-css`
-  * Run `:CocInstall coc-eslint coc-prettier`
-  * Copy the config below to `~/.vim/coc-settings.json`
-  * Type `:so %`
-  * Enjoy :)
+## To install
+* Install [Packer](https://github.com/wbthomason/packer.nvim)
+* Go to plugins file run `:Packer sync`
+* Done
 
-### COC Settings
-  * Copy in File `~/.vim/coc-settings.json`
-  ```
-  {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
-  "tsserver.formatOnType": true,
-  "coc.preferences.formatOnType": true,
-  "javascript.validate.enable": false
-}
+## Switching windows like i3 on Pop Os
+
+Had an i3 config, but found that pop os can be used out of the box like i3 with the config
+below. Since, pop os already supports tiliing and you can update the super key to be `alt` 
+which is what i've done, as I had it on i3.
+
+Thanks to this [comment](https://github.com/pop-os/shell/issues/142#issuecomment-678185443)
+
+```
+dconf write /org/gnome/mutter/dynamic-workspaces false
+dconf write /org/gnome/desktop/wm/preferences/num-workspaces 8
+
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-1 "['<Super>1']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-2 "['<Super>2']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-3 "['<Super>3']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-4 "['<Super>4']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-5 "['<Super>5']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-6 "['<Super>6']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-7 "['<Super>7']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-8 "['<Super>8']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-9 "['<Super>9']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-10 "['<Super>0']"
+
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-1  "['<Super><Shift>1']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-2  "['<Super><Shift>2']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-3  "['<Super><Shift>3']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-4  "['<Super><Shift>4']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-5  "['<Super><Shift>5']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-6  "['<Super><Shift>6']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-7  "['<Super><Shift>7']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-8  "['<Super><Shift>8']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-9  "['<Super><Shift>9']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-10 "['<Super><Shift>0']"
 ```
