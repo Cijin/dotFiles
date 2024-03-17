@@ -5,6 +5,7 @@ require('mason-lspconfig').setup({
     'tsserver',
     'gopls',
     'html',
+    'templ',
   }
 })
 
@@ -18,9 +19,22 @@ lspconfig.gopls.setup({
     }
 })
 
+lspconfig.tsserver.setup({})
+lspconfig.templ.setup({})
+
 -- ensure vscode-langservers-extracted is installed (npm i -g vscode-langservers-extracted)
-lspconfig.cssls.setup({})
 lspconfig.html.setup({})
+lspconfig.tailwindcss.setup({
+  filetypes = {
+    'templ',
+    'html'
+  },
+  init_options = {
+    userLanguages = {
+        templ = "html"
+    }
+  }
+})
 
 local lsp = require('lsp-zero').preset({})
 lsp.set_preferences({
