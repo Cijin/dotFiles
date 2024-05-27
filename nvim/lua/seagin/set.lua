@@ -40,11 +40,7 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 })
 
 -- Format current buffer using LSP, except for Go files.
-vim.api.nvim_create_autocmd(
-  {
-    "BufWritePre" -- triggers just before a buffer is written to file.
-  },
-  {
+vim.api.nvim_create_autocmd("BufWrite", {
     pattern = "*", -- applies to all file types
     callback = function()
       -- Check if the current buffer's filetype is not 'go'.
