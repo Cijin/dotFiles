@@ -4,7 +4,6 @@ require('mason-lspconfig').setup({
     'eslint',
     'tsserver',
     'gopls',
-    'golangci_lint_ls',
     'html',
     'templ',
     'clangd',
@@ -20,10 +19,6 @@ lspconfig.gopls.setup({
         }
     }
 })
-
-lspconfig.golangci_lint_ls.setup {
-	filetypes = {'go'}
-}
 
 lspconfig.tsserver.setup({})
 lspconfig.templ.setup({})
