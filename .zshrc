@@ -70,7 +70,7 @@ ZSH_THEME="gozilla"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-prompt aliases vi-mode zsh-syntax-highlighting ripgrep)
+plugins=(git git-prompt aliases vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,6 +88,9 @@ else
   export EDITOR='vi'
 fi
 
+# fzf keybindings for ctrl-r
+bindkey '^R' fzf-history-widget
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -102,6 +105,10 @@ fi
 
 # go!
 export PATH=$PATH:/usr/local/go/bin
+
+#fzf
+export PATH=$PATH:/usr/bin/fzf
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # nvim alias
 alias vi="~/./nvim.appimage"

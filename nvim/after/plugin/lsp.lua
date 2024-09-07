@@ -1,8 +1,6 @@
 require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {
-    'eslint',
-    'tsserver',
     'gopls',
     'html',
     'templ',
@@ -20,7 +18,7 @@ lspconfig.gopls.setup({
     }
 })
 
-lspconfig.tsserver.setup({})
+lspconfig.ts_ls.setup({})
 lspconfig.templ.setup({})
 
 -- ensure vscode-langservers-extracted is installed (npm i -g vscode-langservers-extracted)

@@ -13,7 +13,7 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use { "ellisonleao/gruvbox.nvim" }
+  use { "scottmckendry/cyberdream.nvim" }
 
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use {
@@ -21,7 +21,6 @@ return require('packer').startup(function(use)
     branch = "harpoon2",
     requires = { {"nvim-lua/plenary.nvim"} }
   }
-  use('mbbill/undotree')
   use('tpope/vim-fugitive')
   use('tpope/vim-surround')
   use('ray-x/go.nvim')
