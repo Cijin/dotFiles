@@ -21,7 +21,7 @@ lspconfig.gopls.setup({
 lspconfig.ts_ls.setup({})
 lspconfig.templ.setup({})
 
--- ensure vscode-langservers-extracted is installed (npm i -g vscode-langservers-extracted)
+-- npm install -g @tailwindcss/language-server for installing language servers for tailwind
 lspconfig.html.setup({})
 lspconfig.tailwindcss.setup({
   filetypes = {
