@@ -13,9 +13,9 @@ local lspconfig = require('lspconfig')
 lspconfig.gopls.setup({
     settings = {
         gopls = {
-            gofumpt = true
+            gofumpt = true,
         }
-    }
+    },
 })
 
 lspconfig.ts_ls.setup({})
