@@ -9,18 +9,14 @@ require("cyberdream").setup({
     hide_fillchars = true,
 
     -- Modern borderless telescope theme - also applies to fzf-lua
-    borderless_telescope = false,
+    borderless_pickers = false,
 
     -- Set terminal colors used in `:terminal`
     terminal_colors = true,
 
     -- Use caching to improve performance - WARNING: experimental feature - expect the unexpected!
     -- Early testing shows a 60-70% improvement in startup time. YMMV. Disables dynamic light/dark theme switching.
-    cache = false, -- generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
-
-    theme = {
-        variant = "default", -- use "light" for the light variant. Also accepts "auto" to set dark or light colors based on the current value of `vim.o.background`
-    },
+    cache = true, -- generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
 
     -- Disable or enable colorscheme extensions
     extensions = {

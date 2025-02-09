@@ -26,10 +26,7 @@ vim.opt.scrolloff = 10				-- scroll page when cursor is 10 lines from top/bottom
 vim.opt.sidescrolloff = 8				-- scroll page when cursor is 8 spaces from left/right
 vim.opt.signcolumn = "yes"
 
--- have a tab stop of 2, so have the color column at 80 / 2
--- as code tends to be more compact, it's a good guideline
--- for when branching has gotten out of hand
-vim.opt.colorcolumn = "40"
+vim.opt.colorcolumn = "80"
 
 vim.opt.updatetime = 50
 
