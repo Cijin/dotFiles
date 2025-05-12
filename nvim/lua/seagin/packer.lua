@@ -1,13 +1,11 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
-
--- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-  -- theme
-  use { "scottmckendry/cyberdream.nvim" }
+
+  -- View stuff
+  use "EdenEast/nightfox.nvim"
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
   use {
@@ -19,6 +17,8 @@ return require('packer').startup(function(use)
     branch = "harpoon2",
     requires = { {"nvim-lua/plenary.nvim"} }
   }
+
+  use ("takac/vim-hardtime")
 
   -- tpope
   use('tpope/vim-fugitive')

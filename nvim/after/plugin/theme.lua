@@ -1,28 +1,42 @@
-require("cyberdream").setup({
-    -- Enable transparent background
+require('nightfox').setup({
+  options = {
+    compile_path = vim.fn.stdpath("cache") .. "/nightfox",
+    compile_file_suffix = "_compiled", -- Compiled file suffix
     transparent = true,
-
-    -- Enable italics comments
-    italic_comments = true,
-
-    -- Replace all fillchars with ' ' for the ultimate clean look
-    hide_fillchars = true,
-
-    -- Modern borderless telescope theme - also applies to fzf-lua
-    borderless_pickers = false,
-
-    -- Set terminal colors used in `:terminal`
     terminal_colors = true,
-
-    -- Use caching to improve performance - WARNING: experimental feature - expect the unexpected!
-    -- Early testing shows a 60-70% improvement in startup time. YMMV. Disables dynamic light/dark theme switching.
-    cache = true, -- generate cache with :CyberdreamBuildCache and clear with :CyberdreamClearCache
-
-    -- Disable or enable colorscheme extensions
-    extensions = {
-        telescope = true,
+    dim_inactive = false,    -- Non focused panes set to alternative background
+    module_default = true,   -- Default enable value for modules
+    colorblind = {
+      enable = false,        -- Enable colorblind support
+      simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
+      severity = {
+        protan = 0,          -- Severity [0,1] for protan (red)
+        deutan = 0,          -- Severity [0,1] for deutan (green)
+        tritan = 0,          -- Severity [0,1] for tritan (blue)
+      },
     },
+    styles = {
+      comments = "NONE",
+      conditionals = "NONE",
+      constants = "NONE",
+      functions = "NONE",
+      keywords = "NONE",
+      numbers = "NONE",
+      operators = "NONE",
+      strings = "NONE",
+      types = "NONE",
+      variables = "NONE",
+    },
+    inverse = {             -- Inverse highlight for different types
+      match_paren = false,
+      visual = false,
+      search = false,
+    },
+  },
+  palettes = {},
+  specs = {},
+  groups = {},
 })
 
--- Set colorscheme after options
-vim.cmd("colorscheme cyberdream")
+-- setup must be called before loading
+vim.cmd("colorscheme nightfox")

@@ -74,11 +74,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["cyberdream.nvim"] = {
-    loaded = true,
-    path = "/home/seagin/.local/share/nvim/site/pack/packer/start/cyberdream.nvim",
-    url = "https://github.com/scottmckendry/cyberdream.nvim"
-  },
   ["go.nvim"] = {
     loaded = true,
     path = "/home/seagin/.local/share/nvim/site/pack/packer/start/go.nvim",
@@ -103,6 +98,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/seagin/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["nightfox.nvim"] = {
+    loaded = true,
+    path = "/home/seagin/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -139,6 +139,12 @@ _G.packer_plugins = {
     path = "/home/seagin/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["vim-hardtime"] = {
+    config = { "\27LJ\2\n5\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1\1\0=\1\2\0K\0\1\0\24hardtime_default_on\6g\bvim\0" },
+    loaded = true,
+    path = "/home/seagin/.local/share/nvim/site/pack/packer/start/vim-hardtime",
+    url = "https://github.com/takac/vim-hardtime"
+  },
   ["vim-surround"] = {
     loaded = true,
     path = "/home/seagin/.local/share/nvim/site/pack/packer/start/vim-surround",
@@ -152,6 +158,10 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: vim-hardtime
+time([[Config for vim-hardtime]], true)
+try_loadstring("\27LJ\2\n5\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1\1\0=\1\2\0K\0\1\0\24hardtime_default_on\6g\bvim\0", "config", "vim-hardtime")
+time([[Config for vim-hardtime]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
