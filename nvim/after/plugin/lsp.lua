@@ -9,6 +9,7 @@ require('mason-lspconfig').setup({
   }
 })
 
+
 vim.lsp.config('gopls', {
   settings = {
     gopls = {
@@ -16,13 +17,22 @@ vim.lsp.config('gopls', {
     }
   }
 })
-
 vim.lsp.config('templ', {})
 vim.lsp.config('html', {})
 vim.lsp.config('ts_ls', {})
 vim.lsp.config('clangd', {})
 vim.lsp.config('zls', {})
 
+vim.lsp.enable('sourcekit')
+vim.lsp.config('sourcekit', {
+  capabilities = {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+      },
+    },
+  },
+})
 vim.lsp.config('tailwindcss', {
   filetypes = { 'templ', 'html' },
   init_options = {

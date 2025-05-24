@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
   use('tpope/vim-surround')
 
   -- LSP Support
+  use { "nvimtools/none-ls.nvim" }
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
