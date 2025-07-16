@@ -58,3 +58,6 @@ dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-8  "['<Super><Sh
 dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-9  "['<Super><Shift>9']"
 dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-10 "['<Super><Shift>0']"
 ```
+
+## Disable animations when switching windows:
+`dconf write /org/gnome/desktop/interface/enable-animations false`
