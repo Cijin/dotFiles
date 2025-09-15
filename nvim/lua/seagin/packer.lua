@@ -18,7 +18,12 @@ return require('packer').startup(function(use)
     requires = { {"nvim-lua/plenary.nvim"} }
   }
 
-  use ("takac/vim-hardtime")
+  use {
+    'm4xshen/hardtime.nvim',
+    config = function()
+      require('hardtime').setup()
+    end
+  }
 
   -- tpope
   use('tpope/vim-fugitive')
