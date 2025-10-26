@@ -5,7 +5,8 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- View stuff
-  use {"ntk148v/komau.vim"}
+  use { "bluz71/vim-moonfly-colors", { as = 'moonfly' }}
+  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
   use {
 	  'nvim-telescope/telescope.nvim',
