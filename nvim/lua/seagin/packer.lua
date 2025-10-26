@@ -5,8 +5,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- View stuff
-  use "EdenEast/nightfox.nvim"
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+  use {"ntk148v/komau.vim"}
 
   use {
 	  'nvim-telescope/telescope.nvim',
