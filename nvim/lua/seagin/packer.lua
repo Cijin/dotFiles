@@ -5,7 +5,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- View stuff
-  use { "bluz71/vim-moonfly-colors", { as = 'moonfly' }}
+  use 'ribru17/bamboo.nvim'
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
   use {
@@ -39,11 +39,6 @@ return require('packer').startup(function(use)
       {'williamboman/mason.nvim'},           -- Optional
       {'williamboman/mason-lspconfig.nvim'}, -- Optional
     }
-  }
-
-  use {
-    'folke/todo-comments.nvim',
-	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
   use('ray-x/go.nvim')
