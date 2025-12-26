@@ -7,6 +7,7 @@ return require('packer').startup(function(use)
   -- View stuff
   use 'ribru17/bamboo.nvim'
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+  use 'folke/todo-comments.nvim'
 
   use {
 	  'nvim-telescope/telescope.nvim',

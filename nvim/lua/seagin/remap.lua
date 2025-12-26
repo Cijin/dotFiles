@@ -15,6 +15,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
+vim.keymap.set("n", "<leader>r", ":checktime<CR>")
+
 -- quick fix list
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
