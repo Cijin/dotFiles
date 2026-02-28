@@ -5,8 +5,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   -- View stuff
-  use 'ribru17/bamboo.nvim'
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+  use 'oxidescheme/nvim'
   use 'folke/todo-comments.nvim'
 
   use {
@@ -17,13 +16,6 @@ return require('packer').startup(function(use)
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     requires = { {"nvim-lua/plenary.nvim"} }
-  }
-
-  use {
-    'm4xshen/hardtime.nvim',
-    config = function()
-      require('hardtime').setup()
-    end
   }
 
   -- tpope
@@ -43,5 +35,7 @@ return require('packer').startup(function(use)
   }
 
   use('ray-x/go.nvim')
+  use('ray-x/guihua.lua')  -- Required for go.nvim
+
   use('ziglang/zig.vim')
 end)
