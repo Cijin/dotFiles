@@ -26,8 +26,6 @@ vim.opt.scrolloff = 10				-- scroll page when cursor is 10 lines from top/bottom
 vim.opt.sidescrolloff = 8				-- scroll page when cursor is 8 spaces from left/right
 vim.opt.signcolumn = "yes"
 
-vim.opt.colorcolumn = "80"
-
 vim.opt.updatetime = 50
 
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {

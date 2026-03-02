@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  catppuccin = {
+    loaded = true,
+    path = "/home/seagin/.local/share/nvim/site/pack/packer/start/catppuccin",
+    url = "https://github.com/catppuccin/nvim"
+  },
   ["go.nvim"] = {
     loaded = true,
     path = "/home/seagin/.local/share/nvim/site/pack/packer/start/go.nvim",
@@ -133,11 +138,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/seagin/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
     url = "https://github.com/folke/todo-comments.nvim"
-  },
-  ["vague.nvim"] = {
-    loaded = true,
-    path = "/home/seagin/.local/share/nvim/site/pack/packer/start/vague.nvim",
-    url = "https://github.com/vague-theme/vague.nvim"
   },
   ["vim-fugitive"] = {
     loaded = true,

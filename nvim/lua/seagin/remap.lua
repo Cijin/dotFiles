@@ -22,3 +22,6 @@ vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+-- if err != nil { return err } :D
+vim.keymap.set('n', '<leader>if', 'oif err != nil {<CR>return err<CR>}<Esc>', { desc = 'Insert if err != nil' })
