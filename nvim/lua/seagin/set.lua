@@ -38,14 +38,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.zig",
-  callback = function()
-    vim.cmd("silent !zig fmt .")
-    vim.cmd("edit!")
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.templ",
   callback = function()
     vim.cmd("silent !templ fmt .")
