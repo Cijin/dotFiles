@@ -28,23 +28,27 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
 
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-    pattern = "*.templ",
-    command = "set filetype=templ",
+-- simpler than runnig it every time
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    vim.cmd("silent !go fmt ./...")
+    vim.cmd("edit!")
+  end,
 })
 
--- Format current buffer using LSP, except for Go files.
-vim.api.nvim_create_autocmd("BufWrite", {
-    pattern = "*", -- applies to all file types
-    callback = function()
-      -- Check if the current buffer's filetype is not 'go'.
-      -- as gofmt will take care of the formatting and if you
-      -- don't skip lsp.buf.format(), they get stuck in an inifinte
-      -- loop trying to format each others fixes
-      if vim.bo.filetype ~= "go" then
-        -- Format the current buffer using Neovim's built-in LSP.
-        vim.lsp.buf.format()
-      end
-    end,
-  }
-)
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.zig",
+  callback = function()
+    vim.cmd("silent !zig fmt .")
+    vim.cmd("edit!")
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.templ",
+  callback = function()
+    vim.cmd("silent !templ fmt .")
+    vim.cmd("edit!")
+  end,
+})
