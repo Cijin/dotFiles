@@ -30,14 +30,6 @@ vim.opt.updatetime = 50
 
 -- simpler than runnig it every time
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-    vim.cmd("silent !go fmt ./...")
-    vim.cmd("edit!")
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.templ",
   callback = function()
     vim.cmd("silent !templ fmt .")
