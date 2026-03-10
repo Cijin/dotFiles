@@ -36,3 +36,16 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.cmd("edit!")
   end,
 })
+
+-- grep
+vim.keymap.set("n", "<leader>ps", function()
+    vim.ui.input({ prompt = "grep: " }, function(input)
+        if not input then return end
+        local results = vim.fn.systemlist("grep -rn " .. vim.fn.shellescape(input) .. " .")
+        if vim.v.shell_error ~= 0 then return end
+        vim.cmd("enew")
+        vim.bo.buftype = "nofile"
+        vim.bo.bufhidden = "wipe"
+        vim.fn.setline(1, results)
+    end)
+end)
