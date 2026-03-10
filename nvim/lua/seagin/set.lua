@@ -43,9 +43,26 @@ vim.keymap.set("n", "<leader>ps", function()
         if not input then return end
         local results = vim.fn.systemlist("grep -rn " .. vim.fn.shellescape(input) .. " .")
         if vim.v.shell_error ~= 0 then return end
-        vim.cmd("enew")
-        vim.bo.buftype = "nofile"
-        vim.bo.bufhidden = "wipe"
-        vim.fn.setline(1, results)
+        vim.fn.setqflist({}, "r", {
+            title = "grep: " .. input,
+            lines = results,
+            efm = "%f:%l:%m"
+        })
+        vim.cmd("copen")
+    end)
+end)
+
+-- find file
+vim.keymap.set("n", "<leader>pf", function()
+    vim.ui.input({ prompt = "find: " }, function(input)
+        if not input then return end
+        local results = vim.fn.systemlist("find . -type f -name " .. vim.fn.shellescape(input))
+        if vim.v.shell_error ~= 0 then return end
+        vim.fn.setqflist({}, "r", {
+            title = "find: " .. input,
+            lines = results,
+            efm = "%f"
+        })
+        vim.cmd("copen")
     end)
 end)
