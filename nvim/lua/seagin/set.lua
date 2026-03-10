@@ -56,7 +56,7 @@ end)
 vim.keymap.set("n", "<leader>pf", function()
     vim.ui.input({ prompt = "find: " }, function(input)
         if not input then return end
-        local results = vim.fn.systemlist("find " .. vim.fn.getcwd() .. " -type f -name " .. vim.fn.shellescape(input))
+        local results = vim.fn.systemlist("find " .. vim.fn.getcwd() .. " -type f -not -path '*/.git/*' -name " .. vim.fn.shellescape(input))
         if vim.v.shell_error ~= 0 then return end
         vim.fn.setqflist({}, "r", {
             title = "find: " .. input,
