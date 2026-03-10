@@ -69,12 +69,12 @@ end)
 
 -- find directory
 vim.keymap.set("n", "<leader>pd", function()
-    vim.ui.input({ prompt = "find: " }, function(input)
+    vim.ui.input({ prompt = "find (dir): " }, function(input)
         if not input then return end
         local results = vim.fn.systemlist("find " .. vim.fn.getcwd() .. " -type d -not -path '*/.git/*' -name " .. vim.fn.shellescape(input))
         if vim.v.shell_error ~= 0 then return end
         vim.fn.setqflist({}, "r", {
-            title = "find: " .. input,
+            title = "find (dir): " .. input,
             lines = results,
             efm = "%f"
         })
