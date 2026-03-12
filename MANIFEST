@@ -1,0 +1,7 @@
+nvim/ = ~/.config
+ghostty = ~/.config
+tmux-sessionizer = ~/.local/bin
+
+.bashrc = ~/
+.zshrc = ~/
+.tmux.conf = ~/
