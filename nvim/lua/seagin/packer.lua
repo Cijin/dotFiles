@@ -9,12 +9,6 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use 'folke/todo-comments.nvim'
 
-  use {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    requires = { {"nvim-lua/plenary.nvim"} }
-  }
-
   -- tpope
   use('tpope/vim-fugitive')
   use('tpope/vim-surround')

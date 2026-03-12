@@ -1,3 +1,4 @@
+# Ghostty config
 background-opacity=0.7
 theme=Brogrammer
 window-inherit-font-size=false
