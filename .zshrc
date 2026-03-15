@@ -15,13 +15,16 @@ fi
 # fzf keybindings for ctrl-r
 bindkey '^R' fzf-history-widget
 
-# go!
+# go
 export PATH=$PATH:/usr/local/go/bin
 # running go install <pkg>
 export PATH=$PATH:$HOME/go/bin
 
-# zig!
+# zig
 export PATH=$PATH:/usr/local/zig
+
+# Tailwind
+export PATH=$PATH:/usr/local/tailwindcss
 
 #fzf
 export PATH=$PATH:/usr/bin/fzf
