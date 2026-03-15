@@ -16,6 +16,7 @@ vim.opt.backup = false
 vim.opt.undofile = true
 
 vim.opt.incsearch = true
+vim.opt.hlsearch = false
 
 vim.opt.termguicolors = true
 
