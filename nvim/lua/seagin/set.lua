@@ -8,7 +8,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
-
+vim.g.netrw_liststyle = 3
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
@@ -25,15 +25,6 @@ vim.opt.sidescrolloff = 8				-- scroll page when cursor is 8 spaces from left/ri
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
-
--- simpler than runnig it every time
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.templ",
-  callback = function()
-    vim.cmd("silent !templ fmt .")
-    vim.cmd("edit!")
-  end,
-})
 
 -- grep
 vim.keymap.set("n", "<leader>ps", function()
