@@ -26,6 +26,13 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
 
+-- for treesitter
+vim.filetype.add({
+  extension = {
+    templ = "templ",
+  },
+})
+
 -- grep
 vim.keymap.set("n", "<leader>ps", function()
     vim.ui.input({ prompt = "grep: " }, function(input)
