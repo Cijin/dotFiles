@@ -8,7 +8,7 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
-vim.g.netrw_liststyle = 3
+vim.g.netrw_liststyle = 1
 vim.opt.wrap = false
 
 vim.opt.swapfile = false
