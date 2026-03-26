@@ -13,7 +13,7 @@ else
 fi
 
 # fzf keybindings for ctrl-r
-bindkey '^R' fzf-history-widget
+#bindkey '^R' fzf-history-widget
 
 # go
 export PATH=$PATH:/usr/local/go/bin
@@ -28,15 +28,15 @@ export PATH=$PATH:/usr/local/tailwindcss
 
 #fzf
 export PATH=$PATH:/usr/bin/fzf
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+#source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # nvim alias
-alias vi="~/./nvim.appimage"
-alias nvim="~/./nvim.appimage"
+alias vi="nvim"
+alias nvim="nvim"
 
 alias tracer="~/./codetracer.appimage"
 
-export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
@@ -52,3 +52,4 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # Turso
 export PATH="$PATH:/home/seagin/.turso"
+export PATH=$PATH:$HOME/.cargo/bin
