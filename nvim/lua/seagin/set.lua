@@ -33,21 +33,6 @@ vim.filetype.add({
   },
 })
 
--- grep
-vim.keymap.set("n", "<leader>ps", function()
-    vim.ui.input({ prompt = "grep: " }, function(input)
-        if not input then return end
-        local results = vim.fn.systemlist("grep -rn " .. vim.fn.shellescape(input) .. " .")
-        if vim.v.shell_error ~= 0 then return end
-        vim.fn.setqflist({}, "r", {
-            title = "grep: " .. input,
-            lines = results,
-            efm = "%f:%l:%m"
-        })
-        vim.cmd("copen")
-    end)
-end)
-
 -- find file
 vim.keymap.set("n", "<leader>pf", function()
     vim.ui.input({ prompt = "find: " }, function(input)
