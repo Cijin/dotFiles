@@ -26,6 +26,8 @@ vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50
 
+vim.opt.completeopt = "" -- don't show the popup for copmletion
+
 -- for treesitter
 vim.filetype.add({
   extension = {
