@@ -24,7 +24,7 @@ export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:/usr/local/zig
 
 # Tailwind
-export PATH=$PATH:/usr/local/tailwindcss
+export PATH=$PATH:/usr/local/tailwind
 
 #fzf
 export PATH=$PATH:/usr/bin/fzf
@@ -52,4 +52,3 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # Turso
 export PATH="$PATH:/home/seagin/.turso"
-export PATH=$PATH:$HOME/.cargo/bin
