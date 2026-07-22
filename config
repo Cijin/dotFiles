@@ -1,6 +1,6 @@
 # Ghostty config
 background-opacity=0.4
-theme=Brogrammer
+theme=Mathias
 window-inherit-font-size=false
 font-size=12
 window-decoration=none
